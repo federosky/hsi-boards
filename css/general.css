@@ -1,0 +1,78 @@
+table {
+	border-collapse:collapse;
+}
+table.content{
+	width:100%;
+	margin:auto;
+	background:#ffffff;
+	font-size:16px;
+	text-align:left;
+}
+table.content tr.odd {
+	background:#f6f6f6;
+}
+table.content th {
+	height:32px;
+	text-align:center;
+	font-size:22px;
+	color:#ffffff;
+}
+table.content td {
+	font-size:24px;
+	padding:3px 5px;
+}
+
+table#race_info th {
+	background:url(../img/th_background.png) center repeat-x;
+	padding:1px;
+}
+table#race_info tr.not_running {
+	color:#666666;
+}
+table#race_info td {
+	font-size:32px;
+	padding:1px;
+
+}
+/* * * * * * * * * * * * * results * * * * * * * * * * * */
+table#ERL, table#ERR {
+	table-layout:fixed;
+	text-align:center;
+	border-right:1px solid #666666;
+}
+
+table#ERL {width:100%;}
+table#ERR {width:100%;}
+table#ERR td{
+	padding:1px 3px;
+	text-align:left;
+}
+
+table#ERL td, table#ERR td {
+	font-size:25px;
+	/*background:#ffffff;*/
+	border-right:1px solid #666666;
+
+}
+
+table#ERL th, table#ERR th {
+	font-size:22px;
+	background:url(../img/th_background.png) repeat-x;
+	padding:3px 5px;
+	color:#ffffff;
+}
+
+table#ERL td.mark {background:url(../img/posicion_5.png) center;font-weight:bold;}
+
+/*** Categoria Jockey ***/
+.not_running {color:#777777;}
+.jockey2{color:#ffcc33;}
+.jockey3{color:#00CC00;}
+.jockey4{color:#ff3333;}
+.retired {text-align:center;color:#ff6363;}
+span.tratado{
+	float:right;
+	color:#009966;
+	font-size:18px;
+	font-weight:bold;
+}

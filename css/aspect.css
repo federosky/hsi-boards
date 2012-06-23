@@ -1,0 +1,132 @@
+/**
+ * Hoja de estilo desarrollada por fixa - www.fixa.com.ar
+ */
+
+/*  hack para firefox */
+/* slightly enhanced, universal clearfix hack */
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.clearfix { display: inline-block; }
+
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* stop commented backslash hack */
+
+img{border:0px;padding:0px;margin:0px;}
+
+body{
+	/*width:1000px;*/
+	/*height:720px;*/
+	padding:0px;
+	margin:0px;
+	background:#005533;
+	text-align:center;
+	font-family: "Trebuchet MS", Verdana, Tahoma, Arial, sans-serif;
+	font-size:10px;
+	overflow:hidden;
+}
+div#content_box{
+	text-align:left;
+}
+/********************* HEADER ***********************/
+div#header{
+	background:#005533;
+	text-align:left;
+	padding:2px 1px;
+	border-bottom:1px solid #ffff99;
+}
+
+div#header_Logo{
+	width:440px;
+	float:left;
+}
+div#header_Logo h2 {
+	float:left;
+	font-size:22px;
+	font-weight:bold;
+	color:#ffffff;
+	margin:3px 0px 0px 2px;
+	padding:0px;
+}
+
+div#header_Title{
+	float:right;
+	color:#ffff99;
+	text-align:right;
+}
+div#header_Title h1{
+	margin:1px 4px;
+	font-size:26px;
+	font-style:italic;
+}
+/**
+ * CONTENT
+ */
+div#content{
+	/*height:590px;*/
+	height:600px;
+	background:#005533;
+	overflow:hidden;
+}
+/******************************************************** FOOTER *******************************************************/
+div#footer{
+	padding-top:10px;
+	height:10px;
+	background:#005533;
+}
+
+div#content div#separator {
+	font-size:92px;
+	color:#ffffff;
+	height:590px;
+	background:#004422;
+	text-transform:uppercase;
+}
+
+div#dividendos {
+	font-size:12px;
+}
+
+/************************************************/
+div.grid_header {
+	height:32px;
+	background:url(../img/th_background.png) center repeat-x;
+}
+div.grid_header div {
+	float:left;
+	text-align:center;
+	padding:1px;
+	font-size:22px;
+	color:#ffffff;
+	font-weight:bold;
+/* 	border-right:1px solid #ffffff; */
+}
+div.grid_header div.order     {width:44px;}
+div.grid_header div.spc       {width:306px;}
+div.grid_header div.kg_spc    {width:56px;}
+div.grid_header div.herraje   {width:92px;}
+div.grid_header div.jockey    {width:244px;}
+div.grid_header div.kg_jockey {width:46px;}
+
+div.grid_line {height:40px;}
+div.grid_line div {
+	float:left;
+	font-size:30px;
+	padding:1px 0px;
+}
+
+div.grid_line div.order     {width:44px;font-size:29px;}
+div.grid_line div.spc       {width:306px;text-align:left;}
+div.grid_line div.kg_spc    {width:56px;}
+div.grid_line div.herraje   {width:92px;font-size:28px;}
+div.grid_line div.jockey    {width:244px;text-align:left;}
+div.grid_line div.kg_jockey {width:46px;}
+div.grid_line div.retired   {width:440px;}
+div.grid_line div.jockey2, div.grid_line div.jockey3, div.grid_line div.jockey4 {width:244px;text-align:left;}

@@ -1,0 +1,9 @@
+# General Apache options
+
+SetEnv APP_ENVIRONMENT development
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !(/doc/)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+ErrorDocument 500 "<h2>Application error</h2>"
