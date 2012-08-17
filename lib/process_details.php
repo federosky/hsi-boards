@@ -87,7 +87,8 @@ while ($record = $dbf->nextRecord())
 {
 	if( $record->choppedData['FORFAIT'] ) continue;
 	$record_data = array_change_key_case($record->choppedData,CASE_LOWER);
-	$record_data['fecha'] = date('Y-m-d',strtotime($record_data['fecha']));
+	$record_data['fecha']   = date('Y-m-d',strtotime($record_data['fecha']));
+	$record_data['nacioel'] = date('Y-m-d', strtotime($record_data['nacioel']));
 	$attrs = array('meeting_id' => $meeting->id, 'number' => $record_data['carrera']);
 	if( $replicate && !$race = Race::model()->findByAttributes($attrs) )
 	{
@@ -187,7 +188,10 @@ $dbf->close();
  * @param Integer $record_id
  */
 function update_record( $dbh, $data, $record_id ){
-	$fields2update = array('tiempo','puesto','difere','divipa','kiloscab','kilos','kilosrea','herraje','jockey');
+	$fields2update = array(
+		'tiempo','puesto','difere','divipa','kiloscab','kilos','kilosrea','herraje','jockey','edadeje',
+		'tratamient'
+	);
 	$sql = 'UPDATE carreras SET ';
 	$fields2join = array();
 	foreach( $fields2update as $field ){
@@ -255,10 +259,14 @@ function get_racedetail_columns()
 		'hipodromo',
 		'fecha',
 		'carrera','nombre','tipo','pista','estado','distancia','tiempo',
-		'orden','forfait','puesto','difere','divipa','kiloscab','kilos','kilosrea','tratamient','herraje','ejemplar','caballer','cuidador',
+		'orden','forfait','puesto','difere','divipa','kiloscab','kilos','kilosrea','tratamient','herraje','ejemplar',
+		'edadeje', 'caballer','cuidador',
 		'jockey','categojoc',
 		'capataz','peon','sereno','nuejem','nucaba','nucuid','nujock','nucapa','nupeon','nusere','modificado',
-		'disputada','horario'
+		'disputada','horario',
+		'edaddesde', 'edadhasta', 'sexo', 'sexocab', 'ganadasdes', 'ganadashas', 'condicion', 'condicion2', 'apuestas',
+		'tierecord', 'totalprem1', 'totalprem2', 'totalprem3', 'totalprem4', 'totalprem5', 'premiotota',
+		'ultimas', 'pelo', 'padre', 'madre', 'abuelo', 'criador', 'nacioel'
 	);
 }
 ?>

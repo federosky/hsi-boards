@@ -17,7 +17,7 @@ else{
 	exit($error_str);
 }
 
-$db_fields = array('carrera','nombre','tipo','pista','distancia','orden',
+$db_fields = array('carrera','nombre','tipo','pista','distancia','orden', 'estado',
 'forfait','puesto','kiloscab','kilos','tratamient','kilosrea','categojoc','herraje','ejemplar','jockey');
 
 $sql = '';

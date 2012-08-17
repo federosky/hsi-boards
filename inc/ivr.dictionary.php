@@ -49,6 +49,7 @@ function IVR_tr($text){
 }
 
 define('VM','ventaja minima');
+define('MIN.', 'ventaja minima');
 define('HOCICO','hocico');
 define('1/2CZA','media cabeza');
 define('CABEZA','cabeza');
@@ -59,6 +60,7 @@ define('1/2CPO','medio cuerpo');
 define('3/4CPO','tres cuartos cuerpo');
 define('CPOS','cuerpos');
 define('CZA','cabeza');
+define('CPO', 'cuerpo');
 
 function IVR_tr_diff($diff){
 	if( !defined($diff) ){

@@ -219,6 +219,7 @@ class XBaseTable
 	    }
 	    $result.= "</tr>\n";
 	    $this->moveTo(-1);
+	    $tdArgs = '';
 	    while ($row = $this->nextRecord())
 	    {
 	    	$color = ($this->recordPos % 2)?'#ffffff':'#f9f9f9';

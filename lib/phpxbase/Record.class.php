@@ -103,11 +103,15 @@ class XBaseRecord
             return $result;
         }
     }
+    
     function forceGetString($columnObj)
     {
-        if (ord($this->choppedData[$columnObj->getName()][0])=="0") return false;
+    	if( !empty($this->choppedData[$columnObj->getName()][0]) ){
+    		if (ord($this->choppedData[$columnObj->getName()][0])=="0") return false;
+    	}
         return trim($this->choppedData[$columnObj->getName()]);
     }
+    
     function getObjectByName($columnName) {
         return $this->getObject($this->table->getColumnByName($columnName));
     }
