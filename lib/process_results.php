@@ -68,8 +68,9 @@ $races_processed = array();
 while ($record = $dbf->nextRecord()) {
 	$record_data = $record->choppedData;
 	$record_data = array_change_key_case($record->choppedData,CASE_LOWER);
-	if( empty($record_data['carrera']) || empty($record_data['nombre']) || empty($record_data['ordenes']) )
+	if( empty($record_data['carrera']) || empty($record_data['nombre']) || empty($record_data['ordenes']) ){
 		continue;
+	}
 	$race_number = $record_data['carrera'];
 	$race_date   = $record_data['fecha'];
 	$sql = 'SELECT * FROM dividendos';
@@ -91,7 +92,7 @@ while ($record = $dbf->nextRecord()) {
 		$affected_rows++;
 	}
 
-	if( !array_search($record_data['carrera'],$races_processed) )
+	if( !in_array($record_data['carrera'],$races_processed) )
 		array_push($races_processed,$record_data['carrera']);
 
 	mysql_free_result($rs);
