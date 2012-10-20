@@ -1,10 +1,13 @@
-<?
+<?php
+/**
+ * 
+ */
 require_once(dirname(__FILE__).'/inc/config.inc.php');
 require_once(dirname(__FILE__).'/inc/common.php');
 require_once(dirname(__FILE__).'/inc/dictionary.php');
 
 /**
- * Conexión a la base..
+ * Conexiï¿½n a la base..
  */
 $db_connected = false;
 if( $dbh = mysql_connect($db_data['host'],$db_data['username'],$db_data['password']) ){
@@ -30,5 +33,3 @@ $reg = mysql_fetch_assoc($rs);
 
 // Allways show the details
 require_once('detail.php');
-
-?>

@@ -26,6 +26,7 @@ $db = array(
 /**
  * App. root url
  */
+$context->param('app.host', 'http://localhost/pizarras');
 $context->param('app.root.url',    '/');
 
 $context->param('app.db.resource', $db);

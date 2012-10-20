@@ -27,14 +27,15 @@ $db = array(
  * Session Config
  */
 $sessionConfig = array(
-					'id'        => 'hipodromo-hsi',
-					'name'      => 'pizarras',
-					'save_path' => '/tmp'
-				);
+	'id'        => 'hipodromo-hsi',
+	'name'      => 'pizarras',
+	'save_path' => '/tmp'
+);
 
 /**
  * App. root url
  */
+$context->param('app.host', 'http://hsi-boards.virtuallabs.local');
 $context->param('app.root.url',    '/');
 
 $context->param('app.db.resource', $db);

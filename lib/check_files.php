@@ -3,6 +3,11 @@
  * 
  */
 require_once(dirname(__FILE__).'/../inc/config.inc.php');
+require_once('logger.class.php');
+
+$logger = Logger::instance('Syslog', 'hsi-boards', LOGGER_ALL);
+$logger->debug(sprintf('App::CheckFiles Start process'));
+
 $source_base_path      = $config['app.dbf.sharedfolder'];
 $destination_base_path = $config['app.dbf.localfolder'];
 
@@ -12,6 +17,7 @@ $destination_file = '';
 $process_action  = '';
 $process_details = dirname(__FILE__).'/process_details.php';
 $process_results = dirname(__FILE__).'/process_results.php';
+$shutdown        = dirname(__FILE__).'/shutdown.php';
 
 $output = array();
 $command = 'ls '.$source_base_path;
@@ -28,8 +34,7 @@ foreach( $output as $file ){
 	echo 'File: '.$file."\n";
 	$source_file      = $source_base_path.$file;
 	$destination_file = $destination_base_path.strtolower($file);
-	if( !checkFileExtension($file, 'dbf') ){
-		unlink($source_file);
+	if( !checkFileExtension($file) ){
 		continue;
 	}
 	switch( strtolower($file) ){
@@ -37,6 +42,8 @@ foreach( $output as $file ){
 			$action = 'process_details'; break;
 		case 'detadiv.dbf':
 			$action = 'process_results'; break;
+		case 'halt.cmd':
+			$action = 'shutdown'; break;
 		default:
 			echo(sprintf('No valid data file %s \n.', $file));
 			continue;
@@ -54,14 +61,21 @@ foreach( $output as $file ){
 	sleep(3);
 }
 
-function checkFileExtension( $file_name, $file_extension ){
+/**
+ * Verify file extension
+ *  
+ * @param string $file_name
+ */
+function checkFileExtension( $file_name )
+{
+	$validExtensions = array('dbf','cmd');
+	$file_name = strtolower($file_name);
 
-	$file_name      = strtolower($file_name);
-	$file_extension = strtolower($file_extension);
-
-	if( !empty($file_name) && !empty($file_extension) ){
-		$extension = substr($file_name,-3,3);
-		if( !strcmp($file_extension,$extension) ) return true;
+	if( !empty($file_name) ){
+		foreach($validExtensions as $extension ){
+			$fileExtension = strtolower(substr($file_name,-3,3));
+			if( !strcmp($fileExtension, $extension) ) return true;
+		}
 	}
 	echo 'Invalid file extension.'."\n";
 	return false;

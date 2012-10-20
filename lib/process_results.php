@@ -92,7 +92,7 @@ while ($record = $dbf->nextRecord()) {
 		$affected_rows++;
 	}
 
-	if( !in_array($record_data['carrera'],$races_processed) )
+	if( !array_search($record_data['carrera'],$races_processed) )
 		array_push($races_processed,$record_data['carrera']);
 
 	mysql_free_result($rs);
@@ -117,7 +117,7 @@ if( $replicate )
 		if( $race = Race::model()->findByAttributes($attrs) )
 		{
 			$race->raced = 1;
-			$race->save();			
+			$race->update(array('raced'));			
 		}
 	}	
 }

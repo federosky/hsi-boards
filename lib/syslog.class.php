@@ -20,7 +20,6 @@
  *
  * @package    Libs
  * @subpackage Logger
- * @author     Rodrigo Garcia <rodrigo.garcia@corp.terra.com.ar>
  * @access private
  */
 

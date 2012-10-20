@@ -104,7 +104,7 @@ while ($record = $dbf->nextRecord())
 			'time_enlapsed' => $record_data['tiempo']
 		);
 		$race->attributes = $data;
-		$race->save(true);
+		$race->update(array_keys($data));
 	}
 
 	$saved_record = array();	

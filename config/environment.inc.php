@@ -36,45 +36,45 @@ $context->param('app.environment', (
 );
 
 /**
- * @global string app.rootpath Ubicaci�n de la aplicaci�n
+ * @global string app.rootpath Ubicacion de la aplicacion
  */
 $app_rootpath = $context->param('app.rootpath',    dirname($file_dirname) .'/');
 $context->param('app.root.url',    '/');
 
 /**
- * @global string app.tmppath Ubicaci�n de los archivos temporales
+ * @global string app.tmppath Ubicacion de los archivos temporales
  */
 $context->param('app.tmppath', $app_rootpath.'tmp/');
 
 /**
- * @global string app.message path Ubicaci�n de los mensajes
+ * @global string app.message path Ubicacion de los mensajes
  */
 $context->param('app.messagepath', $context->param('app.tmppath').'messages/');
 
 
 /**
- * @global string app.queuepath Ubicaci�n de las queues
+ * @global string app.queuepath Ubicacion de las queues
  */
 $context->param('app.queuepath', $context->param('app.tmppath').'queue/');
 
 /**
- * @global string app.sessionpath Ubicaci�n de las sesiones
+ * @global string app.sessionpath Ubicacion de las sesiones
  */
 //$context->param('app.session.savepath', $app_rootpath.'tmp/sessions/');
 $context->param('app.session.savepath', '/tmp');
 
 /**
- * @global string app.uploadpath Ubicaci�n donde se realizan Uploads
+ * @global string app.uploadpath Ubicacion donde se realizan Uploads
  */
 $context->param('app.uploadpath', $app_rootpath.'var/upload/');
 
 /**
- * @global string app.configpath Ubicaci�n de las configuraciones
+ * @global string app.configpath Ubicacion de las configuraciones
  */
 $context->param('app.configpath', $app_rootpath.'config/');
 
 /**
- * @global string app.includepaths Ubicaciones adicionales de inclusi�n.
+ * @global string app.includepaths Ubicaciones adicionales de inclusion.
  */
 $context->param('app.includepaths', array('app/controllers/', 'lib/', 'vendor/', 'vendor/pear', '', 'app/'));
 
