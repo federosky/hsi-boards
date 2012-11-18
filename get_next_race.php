@@ -14,7 +14,7 @@ $http = new HTTP_Request();
 /* Request config */
 $http->setMethod(HTTP_REQUEST_METHOD_GET);
 $http->addHeader('User-Agent', 'pizarras-hsi.org');
-$http->setUrl('http://127.0.0.1/pizarras/next_race.php');
+$http->setUrl($config['app.root.url'].'/next_race.php');
 if( !empty($screen_no) ){
 	$http->addQueryString('screen', $screen_no);
 	$http->addHeader('X-Screen-Number', $screen_no);

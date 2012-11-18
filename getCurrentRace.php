@@ -7,7 +7,7 @@ $http = new HTTP_Request();
 /* Request config */
 $http->setMethod(HTTP_REQUEST_METHOD_GET);
 $http->addHeader('User-Agent', 'pizarras-hsi.org');
-$http->setUrl('http://pizarras-hsi.local/services/race/current');
+$http->setUrl($config['app.root.url'].'/services/race/current');
 
 /* Send request */
 $http->sendRequest();
