@@ -24,6 +24,15 @@ $db_data = array(
 $config['app.rootpath'] = dirname($file_dirname) .'/';
 
 /**
+ * app.root.url 
+ */
+$config['app.root.url'] = 'http://hsi-boards.virtuallabs.local';
+
+/**
+ * Yii framework library location
+ */
+$config['yii.location'] = $config['app.rootpath'].'/../hsi-queries';
+/**
  * Shared folder where to drop files
  */
 $config['app.dbf.sharedfolder'] = '/tmp/dbf/';
@@ -33,8 +42,8 @@ $config['app.dbf.localfolder']  = $config['app.rootpath'].'tmp/dbf/';
  * Forward current race delay in minutes.
  */
 $config['app.race.current.delay'] = 1;
-$config['app.race.forward-url'] = 'http://localhost/pizarras/services/race/forward';
-$config['app.race.current-url'] = 'http://pizarras-hsi.local/services/race/current';
+$config['app.race.forward-url'] = $config['app.root.url'].'/services/race/forward';
+$config['app.race.current-url'] = $config['app.root.url'].'/services/race/current';
 
 /**
  * Config INCLUDEPATH
