@@ -11,8 +11,8 @@ require_once(dirname(__FILE__).'/../inc/ivr.generators.php');
  * Include Yii framework libraries
  */
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/../../hsi-queries/framework/yii.php';
-$yiiMainConfig=dirname(__FILE__).'/../../hsi-queries/protected/config/main.php';
+$yii       = $config['yii.location'].'/framework/yii.php';
+$yiiConfig = $config['yii.location'].'/protected/config/main.php';
 
 // remove the following lines when in production mode
 defined('YII_DEBUG') or define('YII_DEBUG',true);
@@ -20,7 +20,7 @@ defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
 require_once($yii);
-$app = Yii::createWebApplication($yiiMainConfig);
+$app = Yii::createWebApplication($yiiConfig);
 
 $file = dirname(__FILE__).'/../tmp/dbf/detalle.dbf';
 if( !file_exists($file) )

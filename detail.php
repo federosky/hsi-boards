@@ -58,8 +58,9 @@ mysql_close($dbh);
 		<h1>Hip&oacute;dromo de San Isidro</h1>
 	</div>
 </div>
+<?php $lane = 'PISTA: '.tr($carrera_pista).', '.tr('LANE_'.$carrera_pista_estado).', '.$carrera_distancia.' metros';?>
 <div style="text-align:left;padding:1px 3px;">
-	<p style="color:#ffffff;font-size:21px;margin:0px;padding:0px;">PISTA: <?php echo(tr($carrera_pista).', '.$carrera_distancia)?> metros</p>
+	<p style="color:#ffffff;font-size:21px;margin:0px;padding:0px;"><?php echo($lane)?></p>
 </div>
 <div id="grid_box">
 	<div class="grid_header" class="clearfix">

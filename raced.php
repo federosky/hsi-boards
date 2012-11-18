@@ -86,8 +86,9 @@ foreach( $results as $key => $result ){
 <?php
 $output = 'Pista: ';
 $output.= tr($carrera_pista);
-$output.= ', '.$carrera_distancia.' metros';
-if( $carrera_tiempo ) $output.= ', disputada en '.$carrera_tiempo;
+$output.= ', '.tr('LANE_'.$carrera_pista_estado);
+$output.= ', '.$carrera_distancia.' metros.';
+if( $carrera_tiempo ) $output.= ' - Disputada en '.$carrera_tiempo;
 ?>
 <div style="text-align:left;padding:1px 3px;">
 	<p style="color:#ffffff;font-size:21px;margin:0px;padding:0px;">
