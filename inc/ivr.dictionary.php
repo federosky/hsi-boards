@@ -61,12 +61,13 @@ define('3/4CPO','tres cuartos cuerpo');
 define('CPOS','cuerpos');
 define('CZA','cabeza');
 define('CPO', 'cuerpo');
+define('COS', 'cuerpos');
 
 function IVR_tr_diff($diff){
 	if( !defined($diff) ){
 		$pieces = explode(' ',$diff);
 		if( count($pieces) > 1 ){
-			$diff = $pieces[0].' '.constant($pieces[1]);
+			$diff = $pieces[0].' '.@constant($pieces[1]);
 		}
 	}
 	else $diff = constant($diff);

@@ -124,9 +124,9 @@ div.grid_line div {
 
 div.grid_line div.order     {width:44px;font-size:29px;}
 div.grid_line div.spc       {width:306px;text-align:left;}
-div.grid_line div.kg_spc    {width:56px;}
-div.grid_line div.herraje   {width:92px;font-size:28px;}
+div.grid_line div.kg_spc    {width:55px;}
+div.grid_line div.herraje   {width:91px;font-size:28px;}
 div.grid_line div.jockey    {width:244px;text-align:left;}
-div.grid_line div.kg_jockey {width:46px;}
+div.grid_line div.kg_jockey {width:48px;}
 div.grid_line div.retired   {width:440px;}
 div.grid_line div.jockey2, div.grid_line div.jockey3, div.grid_line div.jockey4 {width:244px;text-align:left;}
