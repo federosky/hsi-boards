@@ -68,8 +68,7 @@ $raceCount = (int) $last->choppedData['CARRERA'];
 // Go back to first record to process
 $dbf->reset();
 
-if( !$meeting = Meeting::model()->findByAttributes(array('date' => $date)) )
-{
+if (!$meeting = Meeting::model()->findByAttributes(array('date' => $date))) {
 	$meeting = new Meeting();
 	$data = array(
 		'date' => $date,
@@ -83,8 +82,7 @@ if( !$meeting = Meeting::model()->findByAttributes(array('date' => $date)) )
 	}
 }
 
-while ($record = $dbf->nextRecord())
-{
+while ($record = $dbf->nextRecord()) {
 	if( $record->choppedData['FORFAIT'] ) continue;
 	$record_data = array_change_key_case($record->choppedData,CASE_LOWER);
 	$record_data['fecha']   = date('Y-m-d',strtotime($record_data['fecha']));
@@ -104,10 +102,10 @@ while ($record = $dbf->nextRecord())
 			'time_enlapsed' => $record_data['tiempo']
 		);
 		$race->attributes = $data;
-		$race->update(array_keys($data));
+		$race->save(array_keys($data));
 	}
 
-	$saved_record = array();	
+	$saved_record = array();
 	/******************/
 	$check_sql = 'SELECT id,fecha,carrera,orden,puesto,difere,divipa,jockey,tiempo,disputada FROM carreras ';
 	$check_sql.= ' WHERE fecha = \''.$record_data['fecha'].'\'';
@@ -145,7 +143,7 @@ while ($record = $dbf->nextRecord())
 		// Update existing entry
 		update_record($dbh, $record_data, $saved_record['id']);
 		$affected_rows++;
-		if( $replicate && ($record_data['nombre'] != $race->title || $record_data['tipo'] != $race->type) )
+		if( $replicate ) //&& ($record_data['nombre'] != $race->title || $record_data['tipo'] != $race->type) )
 		{
 			$data = array(
 				'title'         => $record_data['nombre'],
@@ -182,7 +180,7 @@ $dbf->close();
 
 /**
  * Updated an existing race record
- * 
+ *
  * @param DB resource $dbh
  * @param Array $data
  * @param Integer $record_id
@@ -190,7 +188,7 @@ $dbf->close();
 function update_record( $dbh, $data, $record_id ){
 	$fields2update = array(
 		'tiempo','puesto','difere','divipa','kiloscab','kilos','kilosrea','herraje','jockey','edadeje',
-		'tratamient'
+		'tratamient', 'estado'
 	);
 	$sql = 'UPDATE carreras SET ';
 	$fields2join = array();
@@ -243,7 +241,7 @@ function insert_record($dbh, $data){
 }
 
 /**
- * 
+ *
  */
 function is_valid_column($column = '')
 {
