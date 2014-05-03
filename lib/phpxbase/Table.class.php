@@ -1,40 +1,43 @@
 <?php
 /**
-* ----------------------------------------------------------------
-*			XBase
-*			Table.class.php
-*
-*  Developer        : Erwin Kooi
-*  released at      : Nov 2005
-*  last modified by : Erwin Kooi
-*  date modified    : Jan 2006
-*
-*  You're free to use this code as long as you don't alter it
-*  Copyright (c) 2005 Cyane Dynamic Web Solutions
-*  Info? Mail to info@cyane.nl
-*
-* --------------------------------------------------------------
-*
-* This class provides the main entry to a DBF table file.
-* common usage:
-* 1. construct an instance
-* 	$table = new XBaseTable($name);
-* where $name is the path to the the DBF file, or a stream like 'php://input'
-*
-* 2. open the file to read the header
-*	$table->open();
-*
-* 3. iterate through the records
-*	while ($record=$table->nextRecord()) { ... }
-*
-* 4. close the file
-*	$table->close();
-*
-**/
+ * ----------------------------------------------------------------
+ *			XBase
+ *			Table.class.php
+ *
+ *  Developer        : Erwin Kooi
+ *  released at      : Nov 2005
+ *  last modified by : Erwin Kooi
+ *  date modified    : Jan 2006
+ *
+ *  You're free to use this code as long as you don't alter it
+ *  Copyright (c) 2005 Cyane Dynamic Web Solutions
+ *  Info? Mail to info@cyane.nl
+ *
+ * --------------------------------------------------------------
+ *
+ * This class provides the main entry to a DBF table file.
+ * common usage:
+ * 1. construct an instance
+ * 	$table = new XBaseTable($name);
+ * where $name is the path to the the DBF file, or a stream like 'php://input'
+ *
+ * 2. open the file to read the header
+ *	$table->open();
+ *
+ * 3. iterate through the records
+ *	while ($record=$table->nextRecord()) { ... }
+ *
+ * 4. close the file
+ *	$table->close();
+ *
+ */
 
 require_once(dirname(__FILE__).'/Column.class.php');
 require_once(dirname(__FILE__).'/Record.class.php');
 
+/**
+ *
+ */
 class XBaseTable
 {
     var $name;
@@ -59,10 +62,24 @@ class XBaseTable
     var $foxpro;
     var $deleteCount=0;
 
-    function __construct($name) {
-        $this->name=$name;
+    /**
+     * Class contructor
+     *
+     * @param mixed string|stream $name Input identifier
+     *
+     * @return self
+     */
+    function __construct($name)
+    {
+        $this->name = $name;
+        return $this;
     }
 
+    /**
+     * Open Resource
+     *
+     * @return boolean
+     */
     function open()
     {
 	    $fn = $this->name;
@@ -76,12 +93,15 @@ class XBaseTable
     	$this->name = $fn;
     	$this->fp = fopen($fn,"rb");
 		$this->readHeader();
-		return $this->fp!=false;
 
+		return $this->fp!=false;
 	}
 
-	function readHeader() {
-
+	/**
+	 * Read file header
+	 */
+	function readHeader()
+	{
         $this->version = $this->readChar();
         $this->foxpro = $this->version==48 || $this->version==49 || $this->version==245 || $this->version==251;
         $this->modifyDate = $this->read3ByteDate();
@@ -137,18 +157,29 @@ class XBaseTable
         $this->record=false;
         $this->deleteCount=0;
     }
-    function isOpen() {
+
+    /**
+     * Checks whether if the resource is open or not
+     */
+    function isOpen()
+    {
         return $this->fp?true:false;
     }
-    function close() {
+
+    /**
+     * Checks whether if the resource is close or not
+     */
+    function close()
+    {
         fclose($this->fp);
     }
-    
+
     function reset()
     {
     	if( $this->isOpen() ) $this->close();
     	$this->open();
     }
+
     function nextRecord() {
 	    if (!$this->isOpen()) $this->open();
         $valid=false;
