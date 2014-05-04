@@ -49,12 +49,15 @@ class Session
 			throw new Exception('Session config missing.');
 		}
 
-		if( !empty($options['id']) )
+		if (!empty($options['id'])) {
 			$this->id($options['id']);
-		if( !empty($options['name']) )
+		}
+		if (!empty($options['name'])) {
 			$this->name($options['name']);
-		if( !empty($options['save_path']) )
+		}
+		if (!empty($options['save_path'])) {
 			$this->savePath($options['save_path']);
+		}
 	}
 
 	/**
