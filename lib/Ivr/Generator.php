@@ -3,14 +3,18 @@
  * @package IVR
  * @subpackage IVR_Generator
  */
-require_once(dirname(__FILE__).'/../lib/logger.class.php');
-require_once(dirname(__FILE__).'/../inc/ivr.dictionary.php');
+require_once(dirname(__FILE__).'/../../lib/logger.class.php');
+require_once(dirname(__FILE__).'/Dictionary.php');
 /**
  * IVR Generator class
  * Generates messages for each event type
  */
 class Ivr_Generator
 {
+	const TYPE_DEFAULT = 'default';
+	const TYPE_DELETED = 'deleted';
+	const TYPE_CHANGED = 'changed';
+	const TYPE_RESULTS = 'results';
 	/**
 	 * Instance holder
 	 * @var IVR_Generator
@@ -25,16 +29,16 @@ class Ivr_Generator
 	 * Logger instance
 	 */
 	protected $logger;
-	
+
 	/**
 	 * Class constructor
 	 */
 	protected function __construct()
 	{
-		$this->config = require_once(dirname(__FILE__).'/ivr.config.php');
-		$this->logger = Logger::instance('Syslog', 'IVR_generators', LOGGER_ALL);
+		$this->config = require_once(dirname(__FILE__).'/config/ivr.php');
+		$this->logger = Logger::instance('Syslog', 'IVR_Generator', LOGGER_ALL);
 	}
-	
+
 	/**
 	 * Class instanciate
 	 *
@@ -47,7 +51,7 @@ class Ivr_Generator
 		}
 		return self::$_instance;
 	}
-	
+
 	/**
 	 *
 	 * @param unknown_type $items
@@ -56,25 +60,27 @@ class Ivr_Generator
 	{
 		$this->logger->debug(__METHOD__);
 		//
-		foreach( $races as $race_no => $race ){
-		    $file_deleted = sprintf('%s/%s.txt', $file_path_deleted, $race_no);
+		foreach( $items as $race_no => $race ){
+		    $file_deleted = sprintf('%s/%s.txt', $this->config[self::TYPE_DELETED]['directory.src'], $race_no);
 		    file_put_contents(
 	    		$file_deleted,
-	    		sprintf('Borrados de la %s, corren todos.', IVR_Dictionary::tr('CARRERA_'.$race_no, 'race'))
+	    		sprintf('Borrados de la %s, corren todos.', IVR_Dictionary::tr('CARRERA_'.$race_no, IVR_Dictionary::TAXONOMY_RACE))
     		);
-		
-		    $file_results = sprintf('%s/%s.txt', $file_path_results, $race_no);
+
+		    $file_results = sprintf('%s/%s.txt', $this->config[self::TYPE_RESULTS]['directory.src'], $race_no);
 		    file_put_contents(
 	    		$file_results,
-	    		sprintf('%s, sin efectuarse.', IVR_Dictionary::tr('CARRERA_'.$race_no, 'race'))
+	    		sprintf('%s, sin efectuarse.', IVR_Dictionary::tr('CARRERA_'.$race_no, IVR_Dictionary::TAXONOMY_RACE))
     		);
-			/**
-			 * @todo Finish implementation
-			 */
-		    $file_changed = sprintf('%s/%s.txt', $file_path_changed, $race_no);
+
+		    $file_changed = sprintf('%s/%s.txt', $this->config[self::TYPE_CHANGED]['directory.src'], $race_no);
+		    file_put_contents(
+	    		$file_changed,
+		    	sprintf('%s, sin cambios.', IVR_Dictionary::tr('CARRERA_'.$race_no, IVR_Dictionary::TAXONOMY_RACE))
+    		);
 		}
 	}
-	
+
 	/**
 	 * Generates messages for deleted horses from a race
 	 *
@@ -95,10 +101,10 @@ class Ivr_Generator
     		);
 		    $messages[$race] = $text;
 		}
-		
+
 		return $messages;
 	}
-	
+
 	/**
 	 * Generates messages for changes on horse's jockey
 	 *
@@ -110,7 +116,7 @@ class Ivr_Generator
 	{
 		$this->logger->debug(__METHOD__);
 		$messages = array();
-	
+
 		foreach ($items as $race => $changed) {
 		    $text = sprintf(
 	    		'Cambios de monta de la %s:',
@@ -126,10 +132,10 @@ class Ivr_Generator
 		    $text.= sprintf(' %s', implode(', ',$changes)).'.';
 		    $messages[] = $text;
 		}
-		
+
 		return $messages;
 	}
-	
+
 	/**
 	 *
 	 * @param unknown_type $items
@@ -139,7 +145,7 @@ class Ivr_Generator
 	{
 		$this->logger->debug(__METHOD__);
 		$messages = array();
-		
+
 		foreach ($items as $race => $info) {
 		    // Sort array by keys
 		    ksort($info);
@@ -147,7 +153,7 @@ class Ivr_Generator
 		        $info = array_slice($info, 0, 6, true);
 		    }
 		    $text = IVR_Dictionary::tr('CARRERA_'.$race, IVR_Dictionary::TAXONOMY_RACE);
-		
+
 		    $pieces_order = array();
 		    $pieces_diff  = array();
 		    foreach ($info as $puesto => $spc_info) {
@@ -169,15 +175,15 @@ class Ivr_Generator
 		            array_push($pieces_diff, $text_diff);
 		        }
 		    }
-		
+
 		    $text.= ', '.implode(', ', $pieces_order).'.';
 		    $text.= ' '.implode(', ', $pieces_diff).'.';
 		    array_push($messages, $text);
 		}
-		
+
 		return $messages;
 	}
-	
+
 	/**
 	 *
 	 * @param unknown_type $type
@@ -197,10 +203,10 @@ class Ivr_Generator
 			$this->logger->error(__METHOD__.' >> Trying to generate missing message type.');
 		}
 	}
-	
+
 	protected function _getMessage()
 	{
-		
+
 	}
 }
 

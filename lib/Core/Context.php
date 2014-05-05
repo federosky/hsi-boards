@@ -3,6 +3,7 @@
  * Application run Context representation
  */
 require_once(dirname(__FILE__).'/Session.php');
+require_once(dirname(__FILE__).'/../logger.class.php');
 
 /**
  * Context
@@ -23,6 +24,11 @@ class Context
 	 * @access public
 	 */
 	public $session;
+	/**
+	 * Logger Intance
+	 * @var Logger
+	 */
+	public $logger;
 
 	/**
 	 * Class constructor
@@ -49,6 +55,7 @@ class Context
 		$this->_params['app.request.body']         =  @file_get_contents('php://input');
 
 		$this->session = new Session();
+		$this->logger = Logger::instance('Syslog', 'Context', LOGGER_ALL);
 		$this->action($_SERVER['REQUEST_URI']);
 		$this->actionParams(array());
 
